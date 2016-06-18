@@ -1,0 +1,12 @@
+<?php
+
+return [
+    'mbtec' => [
+        'cache' => [
+            'adapter' => 'memory',
+            'global_options' => [
+                'namespace' => 'application',
+            ],
+        ],
+    ],
+];
