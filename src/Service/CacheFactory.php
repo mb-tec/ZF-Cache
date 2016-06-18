@@ -2,7 +2,6 @@
 
 namespace MBtec\Cache\Service;
 
-use Exception;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Cache\StorageFactory;
@@ -40,7 +39,7 @@ class CacheFactory implements FactoryInterface
 
         try {
             $cache = StorageFactory::factory($this->_getAdapterConfig($adapterName));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // Memory cache as fallback
             $cache = StorageFactory::factory($this->_getAdapterConfig('memory'));
         }
