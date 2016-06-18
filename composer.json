@@ -11,7 +11,7 @@
       "email":    "info@mb-tec.eu",
       "homepage": "http://www.mb-tec.eu",
       "role":     "Developer"
-    },
+    }
   ],
   "minimum-stability": "dev",
   "prefer-stable": true,
