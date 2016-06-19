@@ -1,7 +1,7 @@
 {
   "name":        "mb-tec/cache",
   "description": "Cache Service Zend Framework 2",
-  "homepage":    "https://github.com/mb-tec/Cache",
+  "homepage":    "https://bitbucket.org/mbuesing/zf-cache",
   "type":        "library",
   "license":     "GNU General Public License",
   "keywords":   ["mb-tec", "cache", "zf2", "zend", "framework"],
