@@ -2,7 +2,7 @@
 
 return [
     'mbtec' => [
-        'cache' => [
+        'zfcache' => [
             'adapter' => 'memory',
             'global_options' => [
                 'namespace' => 'application',

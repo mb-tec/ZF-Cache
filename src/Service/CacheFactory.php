@@ -1,77 +1,82 @@
 <?php
 
-namespace MBtec\Cache\Service;
+namespace MBtecZfCache\Service;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Cache\StorageFactory;
 
 /**
  * Class        CacheFactory
- * @package     MBtec\Cache\Service
+ * @package     MBtecZfCache\Service
  * @author      Matthias Büsing <info@mb-tec.eu>
  * @copyright   2016 Matthias Büsing
- * @license     GNU General Public License
+ * @license     http://www.opensource.org/licenses/bsd-license.php BSD License
  * @link        http://mb-tec.eu
  */
-class CacheFactory implements FactoryInterface
+class CacheFactory
 {
-    protected $_config = null;
-    protected $_cacheAdapters = ['apc', 'filesystem', 'redis', 'memory'];
+    protected $_aConfig = [];
+    protected $_aCacheAdapters = ['apc', 'filesystem', 'redis', 'memory'];
+    
+    const DEFAULT_ADAPTER = 'memory';
 
     /**
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return mixed|\Zend\Cache\Storage\StorageInterface
-     * @throws \Exception
+     * CacheFactory constructor.
+     *
+     * @param array $aConfig
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __construct(array $aConfig)
     {
-        $globalConfig = $serviceLocator->get('config');
-        $this->_config = $globalConfig['mbtec']['cache'];
+        $this->_aConfig = $aConfig;
+    }
 
-        $adapterName = isset($this->_config['adapter'])
-            ? strtolower($this->_config['adapter'])
-            : 'memory';
+    /**
+     * @return mixed
+     */
+    public function createService()
+    {
+        $sAdapterName = isset($this->_aConfig['adapter'])
+            ? strtolower($this->_aConfig['adapter'])
+            : self::DEFAULT_ADAPTER;
 
-        if (!in_array($adapterName, $this->_cacheAdapters)) {
-            $adapterName = 'memory';
+        if (!in_array($sAdapterName, $this->_aCacheAdapters)) {
+            $sAdapterName = self::DEFAULT_ADAPTER;
         }
 
         try {
-            $cache = StorageFactory::factory($this->_getAdapterConfig($adapterName));
+            $cache = StorageFactory::factory($this->_getAdapterConfig($sAdapterName));
         } catch (\Exception $e) {
             // Memory cache as fallback
-            $cache = StorageFactory::factory($this->_getAdapterConfig('memory'));
+            $cache = StorageFactory::factory($this->_getAdapterConfig(self::DEFAULT_ADAPTER));
         }
 
         return $cache;
     }
 
     /**
-     * @param $adapterName
+     * @param $sAdapterName
      * @return array
      */
-    protected function _getAdapterConfig($adapterName)
+    protected function _getAdapterConfig($sAdapterName)
     {
-        $adapterOptions = [];
+        $aAdapterOptions = [];
 
-        if (isset($this->_config['adapters'][$adapterName]['options'])) {
-            $adapterOptions = array_merge(
-                $adapterOptions, $this->_config['adapters'][$adapterName]['options']
+        if (isset($this->_aConfig['adapters'][$sAdapterName]['options'])) {
+            $aAdapterOptions = array_merge(
+                $aAdapterOptions, $this->_aConfig['adapters'][$sAdapterName]['options']
             );
         }
 
-        $adapterOptions = array_merge(
-            $adapterOptions, $this->_config['global_options']
+        $aAdapterOptions = array_merge(
+            $aAdapterOptions, $this->_aConfig['global_options']
         );
 
         return [
             'adapter' => [
-                'name' => $adapterName,
-                'options' => $adapterOptions,
+                'name' => $sAdapterName,
+                'options' => $aAdapterOptions,
             ],
-            'plugins' => isset($this->_config['plugins'])
-                ? $this->_config['plugins']
+            'plugins' => isset($this->_aConfig['plugins'])
+                ? $this->_aConfig['plugins']
                 : []
         ];
     }
