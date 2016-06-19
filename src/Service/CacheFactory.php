@@ -2,6 +2,7 @@
 
 namespace MBtecZfCache\Service;
 
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\Cache\StorageFactory;
 
@@ -33,7 +34,7 @@ class CacheFactory implements FactoryInterface
     /**
      * @return mixed
      */
-    public function createService()
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $sAdapterName = isset($this->_aConfig['adapter'])
             ? strtolower($this->_aConfig['adapter'])
