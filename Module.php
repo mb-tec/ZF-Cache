@@ -43,15 +43,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     {
         return [
             'factories' => [
-                'mbtec.zfcache' => function ($sm) {
-                    $aModuleConfig = [];
-                    $aConfig = $sm->get('config');
-                    if (isset($aConfig['mbtec']['zfcache'])) {
-                        $aModuleConfig = $aConfig['mbtec']['zfcache'];
-                    }
-                    
-                    return new Service\CacheFactory($aModuleConfig);
-                },
+                'mbtec.zfcache' => 'MBtecZfCache\Service\CacheFactory',
             ],
         ];
     }

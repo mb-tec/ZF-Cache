@@ -22,20 +22,14 @@ class CacheFactory implements FactoryInterface
     const DEFAULT_ADAPTER = 'memory';
 
     /**
-     * CacheFactory constructor.
+     * @param ServiceLocatorInterface $serviceLocator
      *
-     * @param array $aConfig
-     */
-    public function __construct(array $aConfig)
-    {
-        $this->_aConfig = $aConfig;
-    }
-
-    /**
      * @return mixed
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        $this->_prepareConfig($serviceLocator->get('config'));
+        
         $sAdapterName = isset($this->_aConfig['adapter'])
             ? strtolower($this->_aConfig['adapter'])
             : self::DEFAULT_ADAPTER;
@@ -81,5 +75,19 @@ class CacheFactory implements FactoryInterface
                 ? $this->_aConfig['plugins']
                 : []
         ];
+    }
+
+    /**
+     * @param array $aGlobalConfig
+     *
+     * @return $this
+     */
+    protected function _prepareConfig(array $aGlobalConfig)
+    {
+        if (isset($aGlobalConfig['mbtec']['zfcache'])) {
+            $this->_aConfig = $aGlobalConfig['mbtec']['zfcache'];
+        }
+        
+        return $this;
     }
 }
