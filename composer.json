@@ -1,20 +1,24 @@
 {
-  "name":        "mb-tec/zf-cache",
+  "name": "mb-tec/zf-cache",
   "description": "Cache Service for Zend Framework 2",
-  "homepage":    "https://bitbucket.org/mbuesing/zf-cache",
-  "type":        "library",
-  "license":     "GNU General Public License",
-  "keywords":   ["mb-tec", "cache", "zf2", "zend", "framework"],
+  "homepage": "https://bitbucket.org/mbuesing/zf-cache",
+  "type": "library",
+  "license": "GNU General Public License",
+  "keywords": [
+    "mb-tec",
+    "cache",
+    "zf2",
+    "zend",
+    "framework"
+  ],
   "authors": [
     {
-      "name":     "Matthias Büsing",
-      "email":    "info@mb-tec.eu",
+      "name": "Matthias Büsing",
+      "email": "info@mb-tec.eu",
       "homepage": "http://www.mb-tec.eu",
-      "role":     "Developer"
+      "role": "Developer"
     }
   ],
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "require": {
     "php": ">=5.5",
     "zendframework/zend-version": "2.*"
@@ -22,10 +26,12 @@
   "suggest": {
     "zendframework/zend-modulemanager": "To use it as a Zend Framework module"
   },
-  "require-dev": {
-    "zendframework/zend-version": "2.*"
-  },
   "autoload": {
-    "psr-0": {"MBtecZfCache": "src/"}
+    "psr-0": {
+      "MBtecZfCache": "src/"
+    },
+    "classmap": [
+      "Module.php"
+    ]
   }
 }
