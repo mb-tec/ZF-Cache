@@ -7,7 +7,7 @@
  */
 return [
     'mbtec' => [
-        'cache' => [
+        'zfcache' => [
             'adapter' => 'memory',
             'global_options' => [
                 'key_pattern' => null,
