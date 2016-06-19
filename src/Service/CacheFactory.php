@@ -2,6 +2,7 @@
 
 namespace MBtecZfCache\Service;
 
+use Zend\ServiceManager\FactoryInterface;
 use Zend\Cache\StorageFactory;
 
 /**
@@ -12,7 +13,7 @@ use Zend\Cache\StorageFactory;
  * @license     http://www.opensource.org/licenses/bsd-license.php BSD License
  * @link        http://mb-tec.eu
  */
-class CacheFactory
+class CacheFactory implements FactoryInterface
 {
     protected $_aConfig = [];
     protected $_aCacheAdapters = ['apc', 'filesystem', 'redis', 'memory'];
