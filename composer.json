@@ -29,9 +29,6 @@
   "autoload": {
     "psr-0": {
       "MBtecZfCache": "src/"
-    },
-    "classmap": [
-      "Module.php"
-    ]
+    }
   }
 }
