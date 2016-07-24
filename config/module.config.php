@@ -1,4 +1,7 @@
 <?php
+
+namespace MBtecZfCache;
+
 /**
  * @author      Matthias Büsing <info@mb-tec.eu>
  * @copyright   2016 Matthias Büsing
@@ -6,6 +9,11 @@
  * @link        http://mb-tec.eu
  */
 return [
+    'service_manager' => [
+        'factories' => [
+            'mbtec.zfcache' => Service\CacheFactory::class,
+        ],
+    ],
     'mbtec' => [
         'zfcache' => [
             'adapter' => 'memory',
