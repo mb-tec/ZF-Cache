@@ -2,8 +2,8 @@
 
 namespace MBtecZfCache\Service;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Zend\Cache\StorageFactory;
 
 /**
@@ -22,13 +22,15 @@ class CacheFactory implements FactoryInterface
     const DEFAULT_ADAPTER = 'memory';
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ContainerInterface $container
+     * @param                    $requestedName
+     * @param array|null         $options
      *
      * @return mixed
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $this->_aConfig = $serviceLocator->get('config')['mbtec']['zfcache'];
+        $this->_aConfig = $container->get('config')['mbtec']['zfcache'];
 
         $sAdapterName = isset($this->_aConfig['adapter'])
             ? strtolower($this->_aConfig['adapter'])
