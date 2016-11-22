@@ -21,14 +21,17 @@
   ],
   "require": {
     "php": ">=5.6",
-    "zendframework/zend-cache": "2.*"
+    "zendframework/zend-cache": "^2.0"
   },
   "suggest": {
     "zendframework/zend-modulemanager": "To use it as a Zend Framework module"
   },
   "autoload": {
     "psr-0": {
-      "MBtecZfCache": "src/"
+      "MBtecZfCache\\": "src/"
+    },
+    "psr-4": {
+      "MBtecZfCache\\": "src/"
     },
     "classmap": [
       "./Module.php"

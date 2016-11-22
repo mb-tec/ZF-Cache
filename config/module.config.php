@@ -11,11 +11,11 @@ namespace MBtecZfCache;
 return [
     'service_manager' => [
         'factories' => [
-            'mbtec.zfcache' => Service\CacheFactory::class,
+            'mbtec.zf-cache' => Service\CacheFactory::class,
         ],
     ],
     'mbtec' => [
-        'zfcache' => [
+        'zf-cache' => [
             'adapter' => 'memory',
             'global_options' => [
                 'key_pattern' => null,

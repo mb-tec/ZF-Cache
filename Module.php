@@ -2,7 +2,6 @@
 
 namespace MBtecZfCache;
 
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
 /**
@@ -13,20 +12,8 @@ use Zend\ModuleManager\Feature\ConfigProviderInterface;
  * @license     http://www.opensource.org/licenses/bsd-license.php BSD License
  * @link        http://mb-tec.eu
  */
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface
+class Module implements ConfigProviderInterface
 {
-    /**
-     * @return array
-     */
-    public function getAutoloaderConfig()
-    {
-        return [
-            'Zend\Loader\ClassMapAutoloader' => [
-                __DIR__ . '/autoload_classmap.php',
-            ],
-        ];
-    }
-
     /**
      * @return mixed
      */

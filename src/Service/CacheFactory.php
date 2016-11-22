@@ -30,7 +30,7 @@ class CacheFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $this->_aConfig = $container->get('config')['mbtec']['zfcache'];
+        $this->_aConfig = $container->get('config')['mbtec']['zf-cache'];
 
         $sAdapterName = isset($this->_aConfig['adapter'])
             ? strtolower($this->_aConfig['adapter'])
